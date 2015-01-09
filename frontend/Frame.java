@@ -21,10 +21,10 @@ public class Frame extends JFrame implements Display
 								SCREEN_HEIGHT = (int)Toolkit.getDefaultToolkit().getScreenSize().getHeight();
 	
 	//	FRAME PROPERTIES
-	private static String 	FRAME_TITLE = "Seven Seas";
-	private static boolean 	FRAME_RESIZABLE = false,
-							FRAME_VISIBLE = true,
-							FRAME_UNDECORATED = true;
+	private static String 		FRAME_TITLE = "Seven Seas";
+	private static boolean 		FRAME_RESIZABLE = false,
+								FRAME_VISIBLE = true,
+								FRAME_UNDECORATED = false;
 	private static final int 	FRAME_WIDTH = Global.TILE_SIZE*Global.NUM_COLS,
 								FRAME_HEIGHT = Global.TILE_SIZE*Global.NUM_ROWS,
 								FRAME_X = (SCREEN_WIDTH-FRAME_WIDTH)/2,
@@ -32,30 +32,29 @@ public class Frame extends JFrame implements Display
 								FRAME_DEFAULT_CLOSE_OPERATION=JFrame.EXIT_ON_CLOSE;
 	
 	//	DRAWING THINGS
-	private BufferedImage image;
-	private Graphics graphics;
-	private static final Color CLEAR_COLOR = Color.BLACK;
-	private static final int DEFAULT_IMAGE_TYPE = BufferedImage.TYPE_INT_ARGB; 
-	
-	private static String[] filepaths = {	"img/player_ul.png","img/player_u.png","img/player_ur.png",
-											"img/player_l.png",                    "img/player_r.png",
-											"img/player_dl.png","img/player_d.png","img/player_dr.png",
+	private BufferedImage 		image;
+	private Graphics 			graphics;
+	private static final Color 	CLEAR_COLOR = Color.BLACK;
+	private static final int 	DEFAULT_IMAGE_TYPE = BufferedImage.TYPE_INT_ARGB; 
+//	TO-DO: Make game images.
+	private static String[] 	filepaths = {	"img/player_ul.png","img/player_u.png","img/player_ur.png",		
+												"img/player_l.png",                    "img/player_r.png",
+												"img/player_dl.png","img/player_d.png","img/player_dr.png",
 											
-											"img/island.png", "img/whirlpool.png", "img/wreckage.png",
-											"img/cannonball.png","","","","","","","","",
+												"img/island.png", "img/whirlpool.png", "img/wreckage.png",
+												"img/cannonball.png","","","","","","","","",
 											
-											"img/pirate_ul.png","img/pirate_u.png","img/pirate_ur.png",
-											"img/pirate_l.png",                    "img/pirate_r.png",
-											"img/pirate_dl.png","img/pirate_d.png","img/pirate_dr.png"};
-	
-	private static Color[] colors = {Color.BLACK, new Color(0x00,0x66,0xFF)};
+												"img/pirate_ul.png","img/pirate_u.png","img/pirate_ur.png",
+												"img/pirate_l.png",                    "img/pirate_r.png",
+												"img/pirate_dl.png","img/pirate_d.png","img/pirate_dr.png"};
+	private static Color[] 		colors = {		Color.BLACK, 
+												new Color(0x00,0x66,0xFF)};
 	
 	
 	
 	public Frame()
 	{
 		super();
-		
 		initFrame();
 		initImage();
 	}
@@ -96,7 +95,7 @@ public class Frame extends JFrame implements Display
 
 	public void drawImageTile(int x, int y, int image) 
 	{	
-		graphics.drawImage(getImage(image), x, y, null);
+		graphics.drawImage(getImage(image), x*Global.TILE_SIZE, y*Global.TILE_SIZE, null);
 	}
 	
 		private BufferedImage getImage(int image)
@@ -110,13 +109,15 @@ public class Frame extends JFrame implements Display
 			return null;
 		}
 
-	@Override
 	public void clear() 
 	{
 		graphics.setColor(CLEAR_COLOR);
 		graphics.fillRect(0, 0, image.getWidth(), image.getHeight());
 	}
 	
-	
+	public void draw()
+	{
+		repaint();
+	}
 
 }
