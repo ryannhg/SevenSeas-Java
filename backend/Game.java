@@ -16,20 +16,22 @@ public class Game
 		this.input = input;
 		
 		initWorld();
-		//initScore();
 		
+		/*
 		this.playing = true;
 		while(playing)
 		{
 			//	INPUT
-			int command = input.getPlayerMovement();
+			int command = input.getPlayerCommand();
 			
 			//	LOGIC
-			world.movePlayer(command);
+			world.update(command);
 			
 			//	OUTPUT
 			world.draw(display);
-		}
+		}*/
+		
+		world.draw(display);
 	}
 	
 	private void initWorld()

@@ -37,16 +37,14 @@ public class Frame extends JFrame implements Display
 	private static final Color 	CLEAR_COLOR = Color.BLACK;
 	private static final int 	DEFAULT_IMAGE_TYPE = BufferedImage.TYPE_INT_ARGB; 
 //	TO-DO: Make game images.
-	private static String[] 	filepaths = {	"img/player_ul.png","img/player_u.png","img/player_ur.png",		
-												"img/player_l.png",                    "img/player_r.png",
-												"img/player_dl.png","img/player_d.png","img/player_dr.png",
+	private static String[] 	filepaths = {	"img/player_u.png","img/player_ur.png","img/player_r.png","img/player_dr.png",
+												"img/player_d.png","img/player_dl.png","img/player_l.png","img/player_ul.png",
 											
 												"img/island.png", "img/whirlpool.png", "img/wreckage.png",
-												"img/cannonball.png","","","","","","","","",
+												"img/cannonball.png","img/explosion.png","","","","","","","",
 											
-												"img/pirate_ul.png","img/pirate_u.png","img/pirate_ur.png",
-												"img/pirate_l.png",                    "img/pirate_r.png",
-												"img/pirate_dl.png","img/pirate_d.png","img/pirate_dr.png"};
+												"img/pirate_u.png","img/pirate_ur.png","img/pirate_r.png","img/pirate_dr.png",
+												"img/pirate_d.png","img/pirate_dl.png","img/pirate_l.png","img/pirate_ul.png",};
 	private static Color[] 		colors = {		Color.BLACK, 
 												new Color(0x00,0x66,0xFF)};
 	
@@ -86,16 +84,17 @@ public class Frame extends JFrame implements Display
 			g.drawImage(image, this.getInsets().left, this.getInsets().top, null);
 	}
 	
-
+	//	DISPLAY INTERFACE METHODS
+	
 	public void drawColorTile(int x, int y, int color) 
 	{
 		graphics.setColor(colors[color]);
-		graphics.fillRect(x*Global.TILE_SIZE, y*Global.TILE_SIZE, Global.TILE_SIZE, Global.TILE_SIZE);
+		graphics.fillRect(x, y, Global.TILE_SIZE, Global.TILE_SIZE);
 	}
 
 	public void drawImageTile(int x, int y, int image) 
 	{	
-		graphics.drawImage(getImage(image), x*Global.TILE_SIZE, y*Global.TILE_SIZE, null);
+		graphics.drawImage(getImage(image), x, y, null);
 	}
 	
 		private BufferedImage getImage(int image)

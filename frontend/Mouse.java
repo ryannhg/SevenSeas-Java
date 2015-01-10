@@ -3,12 +3,17 @@ package frontend;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import backend.Global;
 import backend.Input;
 
 public class Mouse implements MouseListener, Input 
 {
-	private int 		player_movement;	
+	private int 		command;	
 	
+	public Mouse()
+	{
+		command = Global.CMD_NONE;
+	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) 
@@ -41,9 +46,9 @@ public class Mouse implements MouseListener, Input
 	}
 
 	@Override
-	public int getPlayerMovement() 
+	public int getPlayerCommand() 
 	{
-		return player_movement;
+		return command;
 	}
 
 }
