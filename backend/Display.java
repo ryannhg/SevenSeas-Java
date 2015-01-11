@@ -8,4 +8,6 @@ public interface Display
 	public void draw();
 	
 	public GameClock getGameClock();
+	
+	public void sendNotification(String s);
 }

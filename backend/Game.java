@@ -48,5 +48,13 @@ public class Game
 			//	OUTPUT
 			world.draw(display);
 		}
+		
+		checkForNotifications();
+	}
+	
+	public void checkForNotifications()
+	{
+		if(world.hasNotification())
+			world.sendNotification(display);
 	}
 }

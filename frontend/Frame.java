@@ -12,6 +12,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 import backend.Display;
 import backend.Game;
@@ -145,4 +146,10 @@ public class Frame extends JFrame implements Display
 		return clock;
 	}
 
+	public void sendNotification(String s)
+	{
+		JOptionPane.showMessageDialog(this, s);
+
+	}
+	
 }

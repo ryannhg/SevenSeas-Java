@@ -49,4 +49,28 @@ public class Global
 								TILE_WHIRLPOOL = 4,
 								TILE_WRECKAGE = 5;
 	
+	
+	public static boolean inBounds(int x, int y)
+	{
+		return (x > 0 && x < Global.NUM_COLS && y > 0 && y < Global.NUM_ROWS);
+	}
+	
+	public static int getDirection(int newX, int newY, int oldX, int oldY)
+	{
+		if(newX > oldX)
+		{
+			if(newY > oldY)			return DIR_DR;
+			else if(newY < oldY)	return DIR_UR;
+			else					return DIR_R;
+		}
+		else if(newX < oldX)
+		{
+			if(newY > oldY)			return DIR_DL;
+			else if(newY < oldY)	return DIR_UL;
+			else					return DIR_L;
+		}
+		else if(newY < oldY)		return DIR_U;
+		else						return DIR_D;
+	}
+	
 }
