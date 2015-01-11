@@ -8,12 +8,13 @@ public class Global
 								NUM_ROWS = NUM_COLS,
 								NUM_DIRS = 8,
 								SAFE_DISTANCE = 3,
-								CANNON_RANGE = 3;
+								CANNON_RANGE = 3,
+								TIMER_MS = 200,
+								LEFT_INSET = 0,
+								TOP_INSET = 28;
 								
-	//	INITIAL VALUES
 	public static final int		PLAYER_INIT_X = NUM_COLS/2,
 								PLAYER_INIT_Y = NUM_ROWS/2,
-								
 								INIT_LEVEL = 1;
 	
 	//	IMAGES
@@ -35,7 +36,8 @@ public class Global
 								DIR_D = 4, DIR_DL = 5, DIR_L = 6, DIR_UL = 7;
 	
 	//	INPUT COMMANDS
-	public static final int 	CMD_MOVE = 0,
+	public static final int 	CMD_U = 0, CMD_UR = 1, CMD_R = 2, CMD_DR = 3,
+								CMD_D = 4, CMD_DL = 5, CMD_L = 6, CMD_UL = 7,
 								CMD_NONE = 8,
 								CMD_FIRE = 9;
 	

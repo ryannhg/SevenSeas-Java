@@ -6,4 +6,6 @@ public interface Display
 	public void drawImageTile(int x, int y, int image);
 	public void clear();
 	public void draw();
+	
+	public GameClock getGameClock();
 }

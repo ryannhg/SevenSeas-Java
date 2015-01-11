@@ -6,7 +6,14 @@ public class Main
 
 	public static void main(String[] args) 
 	{
-		new Game(new Frame(),new Mouse());
+		Mouse mouse = new Mouse();
+		Game game = new Game();
+		Frame frame = new Frame(mouse, game);
+		game.setDisplay(frame);
+		game.setInput(mouse);
+		
+		game.start();
+		
 	}
 
 }

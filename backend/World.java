@@ -101,18 +101,75 @@ public class World
 		for(int i = x-distance; i < x + distance; i++)
 			for(int j = y-distance; j < y + distance; j++)
 			{
-				if(i > 0 && i < Global.NUM_COLS && j > 0 && j < Global.NUM_ROWS && tiles[i][j] != null && tiles[i][j].isType(type))
+				if(inBounds(i,j) && tiles[i][j].isType(type))
 					return false;
 			}
 		
 		return true;
 	}
 	
+	private boolean inBounds(int x, int y)
+	{
+		return (x > 0 && x < Global.NUM_COLS && y > 0 && y < Global.NUM_ROWS);
+	}
+	
 	//	HANDLING INPUT
 	
-	public void update(int command)
+	/**
+	 * 
+	 * @param tilePressed - which tile was pressed
+	 * @return true if player input was received
+	 */
+	public boolean update(int tilePressed)
 	{
+		int command = getCommand(tilePressed);
 		
+		String[] commands = {	"UP","UP-RIGHT","RIGHT","DOWN-RIGHT",
+								"DOWN","DOWN-LEFT","LEFT","UP-LEFT",
+								"NONE","FIRE"};
+		
+		if(command != Global.CMD_NONE)
+			System.out.println(commands[command]);
+		
+		return (command != Global.CMD_NONE);
+	}
+	
+	private int getCommand(int tilePressed)
+	{
+		int x = tilePressed%Global.NUM_COLS;
+		int y = tilePressed/Global.NUM_COLS;
+		
+		
+		for(int i = x-1; i < x+2; i++)
+			for(int j = y-1; j < y+2; j++)
+			{
+				if(inBounds(i,j) && tiles[i][j].isType(Global.TILE_PLAYER))
+				{
+					if(i < x)		//	PLAYER TO LEFT
+					{
+						if(j < y)		//	PLAYER ABOVE
+							return Global.CMD_DR;
+						else if (j > y) 	//	PLAYER BELOW
+							return Global.CMD_UR;
+						else return Global.CMD_R;
+					}
+					else if(i > x)	//	PLAYER TO RIGHT
+					{
+						if(j < y)		//	PLAYER ABOVE
+							return Global.CMD_DL;
+						else if (j > y) 	//	PLAYER BELOW
+							return Global.CMD_UL;
+						else return Global.CMD_L;
+					}
+					else if(j < y)		//	PLAYER ABOVE
+						return Global.CMD_D;
+					else if (j > y) 	//	PLAYER BELOW
+						return Global.CMD_U;
+					else return Global.CMD_FIRE;
+				}
+			}
+		
+		return Global.CMD_NONE;
 	}
 	
 	//	DISPLAYING THE GAME

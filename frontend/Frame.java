@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -12,6 +14,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
 import backend.Display;
+import backend.Game;
 import backend.Global;
 
 public class Frame extends JFrame implements Display 
@@ -48,16 +51,20 @@ public class Frame extends JFrame implements Display
 	private static Color[] 		colors = {		Color.BLACK, 
 												new Color(0x00,0x66,0xFF)};
 	
+
+	private Clock 				clock;
+	private Game				game;
 	
-	
-	public Frame()
+	public Frame(Mouse m, Game g)
 	{
 		super();
-		initFrame();
+		this.game = g;
+		initFrame(m);
 		initImage();
+		
 	}
 	
-	private void initFrame()
+	private void initFrame(Mouse m)
 	{
 		this.setTitle(FRAME_TITLE);
 		this.setResizable(FRAME_RESIZABLE);
@@ -67,9 +74,22 @@ public class Frame extends JFrame implements Display
 		this.pack();
 		this.setLocation(FRAME_X,FRAME_Y);
 		
+		this.addMouseListener(m);
+		
+		clock = new Clock(Global.TIMER_MS, new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) 
+			{
+				game.step();
+			}
+			
+		},game);
+		
 		this.setDefaultCloseOperation(FRAME_DEFAULT_CLOSE_OPERATION);
 		
 		this.setVisible(FRAME_VISIBLE);
+		
 	}
 	
 	private void initImage()
@@ -117,6 +137,12 @@ public class Frame extends JFrame implements Display
 	public void draw()
 	{
 		repaint();
+	}
+
+	@Override
+	public Clock getGameClock() 
+	{
+		return clock;
 	}
 
 }

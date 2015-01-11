@@ -8,17 +8,23 @@ import backend.Input;
 
 public class Mouse implements MouseListener, Input 
 {
-	private int 		command;	
+	private int 		tile;
 	
 	public Mouse()
 	{
-		command = Global.CMD_NONE;
+		tile = -1;
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) 
 	{
-		
+		int x = e.getX()-Global.LEFT_INSET;
+		int y = e.getY()-Global.TOP_INSET;
+				
+		int tile_x = x/Global.TILE_SIZE;
+		int tile_y = y/Global.TILE_SIZE;
+				
+		tile = tile_x+tile_y*Global.NUM_COLS;
 	}
 
 	@Override
@@ -46,9 +52,12 @@ public class Mouse implements MouseListener, Input
 	}
 
 	@Override
-	public int getPlayerCommand() 
+	public int getTilePressed() 
 	{
-		return command;
+		// TODO Auto-generated method stub
+		int tile = this.tile;
+		this.tile = -1;
+		return tile;
 	}
 
 }

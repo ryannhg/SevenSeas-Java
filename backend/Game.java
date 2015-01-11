@@ -5,33 +5,14 @@ public class Game
 	//	INTERFACES
 	private Display 			display;
 	private Input 				input;
+	private GameClock			gameClock;
 	
 	//	GAME VARIABLES
 	private World				world;
-	private boolean				playing;
 	
-	public Game(Display display, Input input)
+	public Game()
 	{
-		this.display = display;
-		this.input = input;
-		
 		initWorld();
-		
-		/*
-		this.playing = true;
-		while(playing)
-		{
-			//	INPUT
-			int command = input.getPlayerCommand();
-			
-			//	LOGIC
-			world.update(command);
-			
-			//	OUTPUT
-			world.draw(display);
-		}*/
-		
-		world.draw(display);
 	}
 	
 	private void initWorld()
@@ -39,4 +20,33 @@ public class Game
 		world = new World();
 	}
 	
+	public void setDisplay(Display display)
+	{
+		this.display = display;
+		this.gameClock = display.getGameClock();
+	}
+	
+	public void setInput(Input input)
+	{
+		this.input = input;
+	}
+	
+	public void start()
+	{
+		world.draw(display);
+		gameClock.start();
+	}
+	
+	public void step()
+	{
+		//	INPUT
+		int tilePressed = input.getTilePressed();
+		
+		//	LOGIC
+		if(world.update(tilePressed))
+		{
+			//	OUTPUT
+			world.draw(display);
+		}
+	}
 }
